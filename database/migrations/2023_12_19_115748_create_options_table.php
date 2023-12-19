@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('polls', function (Blueprint $table) {
-            $table->char('id', 5)->primary();
-            $table->string('statement');
-            $table->string('waktu');
+        Schema::create('options', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('id_poll')->onDelete('cascade');
+            $table->string('option');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('polls');
+        Schema::dropIfExists('options');
     }
 };

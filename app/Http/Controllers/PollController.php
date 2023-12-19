@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Poll;
 use App\Http\Requests\StorePollRequest;
 use App\Http\Requests\UpdatePollRequest;
+use App\Models\Option;
+use Illuminate\Http\Request;
 
 class PollController extends Controller
 {
@@ -21,15 +23,38 @@ class PollController extends Controller
      */
     public function create()
     {
-        return view('poll.create');
+        do {
+            $angka = fake()->randomNumber(5);
+        } while (Poll::where('id_poll', $angka)->exists());
+        return view('poll.create', [
+            'id_poll' => $angka,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StorePollRequest $request)
+    public function store(Request $request)
     {
-        //
+        $request->validate([
+            'statement' => 'required',
+            'options' => 'required|array|min:2',
+            'options.*' => 'required|string',
+        ]);
+
+        $poll = Poll::create([
+            'statement' => $request->input('statement'),
+            'waktu' => now(),
+        ]);
+
+        foreach ($request->input('options') as $option) {
+            Option::create([
+                'poll_id' => $poll->id,
+                'option' => $option,
+            ]);
+        }
+
+        return redirect()->route('poll.index')->with('success', 'Poll created successfully.');
     }
 
     /**
