@@ -13,7 +13,7 @@ class PollController extends Controller
      */
     public function index()
     {
-        //
+        return view('poll.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class PollController extends Controller
      */
     public function create()
     {
-        //
+        return view('poll.create');
     }
 
     /**
