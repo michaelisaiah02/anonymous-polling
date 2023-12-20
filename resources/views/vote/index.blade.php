@@ -2,7 +2,7 @@
 
 <script>
     // Get the end time for the countdown from the database
-    var endTime = new Date("{{ $endTime }}").getTime();
+    var endTime = new Date("{{ $waktu_selesai }}").getTime();
 
     // Update the countdown every second
     var countdownInterval = setInterval(function() {

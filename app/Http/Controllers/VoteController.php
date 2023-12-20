@@ -14,6 +14,7 @@ class VoteController extends Controller
      */
     public function index(Poll $polls)
     {
+        dd($polls);
         return view('vote.index', [
             'polls' => $polls,
         ]);

@@ -13,7 +13,7 @@
                                 <label for="id_poll" class="col col-form-label fs-2">Poll ID:</label>
                                 <div class="col">
                                     <input type="text" class="form-control bg-transparent border-0 fs-2" id="id_poll"
-                                        name="id_poll" value="42411" disabled>
+                                        name="id_poll" value="{{ $id_poll }}" readonly>
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
@@ -36,16 +36,16 @@
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="option"
-                                    class="form-control @error('option[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
-                                    id="option" name="option[]" placeholder="Masukan ID Poll"
-                                    value="{{ old('option[]') }}" required autofocus>
+                                    class="form-control @error('options[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
+                                    id="option" name="options[]" placeholder="Masukan ID Poll"
+                                    value="{{ old('options[]') }}" required autofocus>
                                 <label for="option" class="text-dark-emphasis bg-transparent">Opsi A</label>
                             </div>
                             <div class="form-floating mb-3">
                                 <input type="option"
-                                    class="form-control @error('option[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
-                                    id="option" name="option[]" placeholder="Masukan ID Poll"
-                                    value="{{ old('option[]') }}" required autofocus>
+                                    class="form-control @error('options[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
+                                    id="option" name="options[]" placeholder="Masukan ID Poll"
+                                    value="{{ old('options[]') }}" required autofocus>
                                 <label for="option" class="text-dark-emphasis bg-transparent">Opsi B</label>
                             </div>
                             <div class="form-floating mb-3" id="optionsContainer"></div>
@@ -70,12 +70,11 @@
             var optionLabel = String.fromCharCode(66 + optionCount);
             var newOption = $(
                 '<div class="form-floating mb-3">' +
-                '<input type="option" class="form-control @error('option[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4" id="option" name="option[]" placeholder="Masukan ID Poll" value="{{ old('option[]') }}" autofocus>' +
+                '<input type="option" class="form-control @error('options[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4" id="option" name="options[]" placeholder="Masukan ID Poll" value="{{ old('options[]') }}" autofocus>' +
                 '<label for="option" class="text-dark-emphasis bg-transparent">Opsi ' + optionLabel + '</label>' +
                 '</div>'
             );
             optionsContainer.append(newOption);
         }
     </script>
-    @dd($errors->all())
 @endsection

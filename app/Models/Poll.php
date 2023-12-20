@@ -11,8 +11,9 @@ class Poll extends Model
 
     protected $fillable = [
         'id_poll',
+        'user_id',
         'statement',
-        'waktu',
+        'waktu_selesai',
         'created_by',
     ];
 

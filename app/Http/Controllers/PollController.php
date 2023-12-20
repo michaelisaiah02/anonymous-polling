@@ -36,28 +36,28 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
         $request->validate([
             'id_poll' => 'required|unique:polls,id_poll',
             'statement' => 'required',
-            'option' => 'required|array|min:2',
-            'option.*' => 'required',
+            'options' => 'required|array|min:2',
+            'options.*' => 'required',
         ]);
 
         $poll = Poll::create([
             'id_poll' => $request->id_poll,
+            'created_by' => auth()->user()->id,
             'statement' => $request->statement,
             'waktu_selesai' => now()->addSeconds($request->input('waktu')),
         ]);
 
-        foreach ($request->input('options') as $option) {
+        foreach ($request->options as $option) {
             Option::create([
-                'poll_id' => $poll->id,
+                'id_poll' => $request->id_poll,
                 'option' => $option,
             ]);
         }
 
-        return redirect()->route('vote.index')->with('success', 'Poll created successfully.');
+        return redirect()->route('vote.index')->withInput();
     }
 
     /**
