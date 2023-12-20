@@ -10,13 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('polls', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->char('id_poll', 5)->unique();
-            $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
-            $table->string('statement');
-            $table->dateTime('waktu_mulai')->default(now());
-            $table->dateTime('waktu_selesai')->default(now()->addMinute());
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('option_id')->constrained('options')->cascadeOnDelete();
+            $table->foreignId('poll_id')->constrained('polls')->cascadeOnDelete();
             $table->timestamps();
         });
     }
@@ -26,6 +24,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('polls');
+        Schema::dropIfExists('votes');
     }
 };

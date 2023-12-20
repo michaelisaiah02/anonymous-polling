@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PollController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,4 +24,5 @@ Route::get('/register', [LoginController::class, 'register'])->name('register')-
 Route::post('/register', [LoginController::class, 'create_user']);
 
 // Poll
-Route::resource('poll', PollController::class)->middleware('auth');
+Route::resource('/poll', PollController::class)->middleware('auth');
+Route::resource('/vote', VoteController::class)->middleware('auth');

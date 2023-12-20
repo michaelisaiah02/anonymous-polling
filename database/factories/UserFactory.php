@@ -26,7 +26,7 @@ class UserFactory extends Factory
         return [
             'nama' => fake()->name(),
             'username' => fake()->unique()->userName(),
-            'password' => bcrypt('12345'),
+            'password' => bcrypt('123456'),
             'last_login' => now(),
             'remember_token' => Str::random(10),
         ];

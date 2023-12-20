@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Home')
+@section('title', 'Buat Poll')
 @section('content')
     <div class="container">
         <div class="row justify-content-center align-items-center vh-100 m-0">
@@ -10,28 +10,72 @@
                         <form method="POST" action="{{ url('/poll') }}">
                             @csrf
                             <div class="mb-3 row">
-                                <label for="id_poll" class="col col-form-label">Poll ID:</label>
-                                <div class="col-auto">
-                                    <input type="number" class="form-control bg-transparent border-0" id="id_poll"
-                                        name="id_poll" value="{{ $id_poll }}" disabled>
+                                <label for="id_poll" class="col col-form-label fs-2">Poll ID:</label>
+                                <div class="col">
+                                    <input type="text" class="form-control bg-transparent border-0 fs-2" id="id_poll"
+                                        name="id_poll" value="42411" disabled>
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="username"
-                                    class="form-control {{ $errors->any() ? 'is-invalid' : '' }} bg-transparent border border-2 border-dark rounded-4"
-                                    id="username" name="username" placeholder="Masukan ID Poll"
-                                    value="{{ old('username') }}" autofocus>
-                                <label for="username" class="text-dark-emphasis bg-transparent">Masukan ID Poll</label>
+                                <input type="statement"
+                                    class="form-control @error('statement') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
+                                    id="statement" name="statement" placeholder="Masukan ID Poll"
+                                    value="{{ old('statement') }}" autofocus>
+                                <label for="statement" class="text-dark-emphasis bg-transparent">Statement</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select
+                                    class="form-select @error('waktu') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
+                                    id="waktu" name="waktu" autofocus>
+                                    <option value="30">30 Detik</option>
+                                    <option value="60">1 Menit</option>
+                                    <option value="120">2 Menit</option>
+                                    <option value="300">5 Menit</option>
+                                </select>
+                                <label for="waktu" class="text-dark-emphasis bg-transparent">Batas Waktu</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="option"
+                                    class="form-control @error('option[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
+                                    id="option" name="option[]" placeholder="Masukan ID Poll"
+                                    value="{{ old('option[]') }}" required autofocus>
+                                <label for="option" class="text-dark-emphasis bg-transparent">Opsi A</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="option"
+                                    class="form-control @error('option[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
+                                    id="option" name="option[]" placeholder="Masukan ID Poll"
+                                    value="{{ old('option[]') }}" required autofocus>
+                                <label for="option" class="text-dark-emphasis bg-transparent">Opsi B</label>
+                            </div>
+                            <div class="form-floating mb-3" id="optionsContainer"></div>
+                            <div class="row mb-3">
+                                <button class="btn btn-outline-dark border border-2 border-dark rounded-3 px-5"
+                                    type="button" onclick="addOption()">Tambah
+                                    Opsi</button>
+                            </div>
+                            <div class="row mb-3">
+                                <button class="btn btn-outline-success border-2 rounded-3 " type="submit">Start</button>
                             </div>
                         </form>
-                        <div class="row">
-                            <div class="col d-flex justify-content-center">
-                                <a href="{{ url('poll/create') }}" class="btn btn-outline-success">Buat Polling Baru</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function addOption() {
+            var optionsContainer = $('#optionsContainer');
+            var optionCount = optionsContainer.children().length + 1;
+            var optionLabel = String.fromCharCode(66 + optionCount);
+            var newOption = $(
+                '<div class="form-floating mb-3">' +
+                '<input type="option" class="form-control @error('option[]') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4" id="option" name="option[]" placeholder="Masukan ID Poll" value="{{ old('option[]') }}" autofocus>' +
+                '<label for="option" class="text-dark-emphasis bg-transparent">Opsi ' + optionLabel + '</label>' +
+                '</div>'
+            );
+            optionsContainer.append(newOption);
+        }
+    </script>
+    @dd($errors->all())
 @endsection

@@ -24,8 +24,8 @@ class PollController extends Controller
     public function create()
     {
         do {
-            $angka = fake()->randomNumber(5);
-        } while (Poll::where('id_poll', $angka)->exists());
+            $angka = fake()->randomNumber(5, true);
+        } while (Poll::where('id', $angka)->exists());
         return view('poll.create', [
             'id_poll' => $angka,
         ]);
@@ -36,15 +36,18 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         $request->validate([
+            'id_poll' => 'required|unique:polls,id_poll',
             'statement' => 'required',
-            'options' => 'required|array|min:2',
-            'options.*' => 'required|string',
+            'option' => 'required|array|min:2',
+            'option.*' => 'required',
         ]);
 
         $poll = Poll::create([
-            'statement' => $request->input('statement'),
-            'waktu' => now(),
+            'id_poll' => $request->id_poll,
+            'statement' => $request->statement,
+            'waktu_selesai' => now()->addSeconds($request->input('waktu')),
         ]);
 
         foreach ($request->input('options') as $option) {
@@ -54,7 +57,7 @@ class PollController extends Controller
             ]);
         }
 
-        return redirect()->route('poll.index')->with('success', 'Poll created successfully.');
+        return redirect()->route('vote.index')->with('success', 'Poll created successfully.');
     }
 
     /**

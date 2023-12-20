@@ -42,4 +42,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function polls()
+    {
+        return $this->hasMany(Poll::class, 'user_id', 'id');
+    }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'user_id', 'id');
+    }
 }
