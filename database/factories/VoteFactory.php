@@ -17,7 +17,9 @@ class VoteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'user_id' => fake()->numberBetween(1, 10),
+            'option_id' => fake()->numberBetween(1, 10),
+            'poll_id' => fake()->randomNumber(5, true),
         ];
     }
 }

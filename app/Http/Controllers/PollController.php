@@ -56,8 +56,7 @@ class PollController extends Controller
                 'option' => $option,
             ]);
         }
-
-        return redirect()->route('vote.index')->withInput();
+        return redirect()->route('poll.show', ['poll' => $poll]);
     }
 
     /**
@@ -65,7 +64,9 @@ class PollController extends Controller
      */
     public function show(Poll $poll)
     {
-        //
+        return view('vote.index', [
+            'poll' => $poll,
+        ]);
     }
 
     /**

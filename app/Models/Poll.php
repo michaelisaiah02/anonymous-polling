@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Poll extends Model
 {
     use HasFactory;
+    protected $with = ['user'];
 
     protected $fillable = [
         'id_poll',
@@ -17,9 +18,14 @@ class Poll extends Model
         'created_by',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'id_poll';
+    }
+
     public function options()
     {
-        return $this->hasMany(Option::class, 'id_poll', 'id');
+        return $this->hasMany(Option::class, 'id_poll', 'id_poll');
     }
 
     public function user()
@@ -29,6 +35,6 @@ class Poll extends Model
 
     public function votes()
     {
-        return $this->hasMany(Vote::class, 'poll_id', 'id');
+        return $this->hasMany(Vote::class, 'poll_id', 'id_poll');
     }
 }

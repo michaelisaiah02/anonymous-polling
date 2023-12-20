@@ -12,12 +12,9 @@ class VoteController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Poll $polls)
+    public function index()
     {
-        dd($polls);
-        return view('vote.index', [
-            'polls' => $polls,
-        ]);
+        //
     }
 
     /**

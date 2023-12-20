@@ -17,7 +17,11 @@ class PollFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id_poll' => fake()->randomNumber(5, true),
+            'created_by' => fake()->numberBetween(1, 10),
+            'statement' => fake()->sentence(5),
+            'waktu_selesai' => fake()->dateTimeBetween('now', '+1 hours'),
+            'created_by' => fake()->numberBetween(1, 10),
         ];
     }
 }

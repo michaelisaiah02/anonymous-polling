@@ -48,7 +48,7 @@
                                     value="{{ old('options[]') }}" required autofocus>
                                 <label for="option" class="text-dark-emphasis bg-transparent">Opsi B</label>
                             </div>
-                            <div class="form-floating mb-3" id="optionsContainer"></div>
+                            <div id="optionsContainer"></div>
                             <div class="row mb-3">
                                 <button class="btn btn-outline-dark border border-2 border-dark rounded-3 px-5"
                                     type="button" onclick="addOption()">Tambah

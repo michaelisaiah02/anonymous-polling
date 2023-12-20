@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Option;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class OptionSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Option::factory(10)->create();
     }
 }

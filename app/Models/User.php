@@ -23,6 +23,11 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -45,7 +50,7 @@ class User extends Authenticatable
 
     public function polls()
     {
-        return $this->hasMany(Poll::class, 'user_id', 'id');
+        return $this->hasMany(Poll::class, 'created_by', 'id');
     }
 
     public function votes()

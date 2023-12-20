@@ -17,7 +17,8 @@ class OptionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id_poll' => fake()->randomNumber(5, true),
+            'option' => fake()->word(5),
         ];
     }
 }
