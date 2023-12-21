@@ -6,6 +6,7 @@ use App\Models\Poll;
 use App\Http\Requests\StorePollRequest;
 use App\Http\Requests\UpdatePollRequest;
 use App\Models\Option;
+use App\Models\Vote;
 use Illuminate\Http\Request;
 
 class PollController extends Controller
@@ -64,9 +65,20 @@ class PollController extends Controller
      */
     public function show(Poll $poll)
     {
-        return view('vote.index', [
-            'poll' => $poll,
-        ]);
+        if ($poll->waktu_selesai > now() && !Vote::where('id_poll', $poll->id_poll)->where('user_id', auth()->user()->id)->exists()) {
+            return view('vote.index', [
+                'poll' => $poll,
+            ]);
+        } elseif ($poll->waktu_selesai < now()) {
+            return view('vote.selesai', [
+                'poll' => $poll,
+                'options' => '$option',
+            ]);
+        } elseif ($poll->waktu_selesai > now() || Vote::where('id_poll', $poll->id_poll)->where('user_id', auth()->user()->id)->exists()) {
+            return view('vote.voted', [
+                'poll' => $poll,
+            ]);
+        }
     }
 
     /**

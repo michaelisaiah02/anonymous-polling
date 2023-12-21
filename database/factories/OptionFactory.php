@@ -18,7 +18,7 @@ class OptionFactory extends Factory
     {
         return [
             'id_poll' => fake()->randomNumber(5, true),
-            'option' => fake()->word(5),
+            'option' => fake()->word(),
         ];
     }
 }

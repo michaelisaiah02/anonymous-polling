@@ -30,11 +30,11 @@ class Poll extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'created_by', 'id');
     }
 
     public function votes()
     {
-        return $this->hasMany(Vote::class, 'poll_id', 'id_poll');
+        return $this->hasMany(Vote::class, 'id_poll', 'id_poll');
     }
 }

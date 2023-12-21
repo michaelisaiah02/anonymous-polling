@@ -11,7 +11,7 @@ class StoreOptionRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreOptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'id_poll' => 'required|exists:polls,id_poll',
+            'option' => 'required',
         ];
     }
 }

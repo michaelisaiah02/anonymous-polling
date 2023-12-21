@@ -7,15 +7,18 @@
                 <div
                     class="card rounded-5 border border-3 bg-warning-subtle bg-opacity-25 px-xxl-3 px-md-1 mx-0 font-handlee">
                     <div class="card-body mx-xxl-5 mx-md-3 mt-xxl-4 mt-md-2 mb-xxl-5 mb-md-1">
-                        <form method="POST" action="{{ url('/') }}">
+                        <form method="GET" action="{{ url('vote/poll') }}">
                             @csrf
                             <div class="form-floating mb-3">
-                                <input type="username"
-                                    class="form-control {{ $errors->any() ? 'is-invalid' : '' }} bg-transparent border border-2 border-dark rounded-4"
-                                    id="username" name="username" placeholder="Masukan ID Poll"
-                                    value="{{ old('username') }}" autofocus>
-                                <label for="username" class="text-dark-emphasis bg-transparent">Masukan ID Poll</label>
+                                <input type="text"
+                                    class="form-control @error('id_poll') is-invalid @enderror bg-transparent border border-2 border-dark rounded-4"
+                                    id="id_poll" name="id_poll" placeholder="Masukan ID Poll" value="{{ old('id_poll') }}"
+                                    autofocus>
+                                <label for="id_poll" class="text-dark-emphasis bg-transparent">Masukan ID Poll</label>
                             </div>
+                            @error('id_poll')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                         </form>
                         <div class="row mb-xxl-4 mb-2 justify-content-between">
                             <div class="col align-self-center">

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Buat Poll')
+@section('title', 'Poll Selesai')
 @section('content')
     <div class="container">
         <div class="row justify-content-center align-items-center vh-100 m-0">
@@ -10,21 +10,18 @@
                         <form method="POST" action="{{ url('/vote') }}">
                             @csrf
                             <input type="text" name="user_id" value="{{ auth()->user()->id }}" hidden>
-                            <input type="text" name="id_poll" value="{{ $poll->id_poll }}" hidden>
+                            <input type="text" name="poll_id" value="{{ $poll->id }}" hidden>
                             <div class="mb-3 mt-0 text-center fs-2 fw-bold" id="countdown"></div>
                             <div class="row mb-3">
                                 <div class="col">
                                     <h4 class="text-dark text-center">{{ $poll->statement }}</h4>
                                 </div>
                             </div>
-                            @foreach ($poll->options as $option)
-                                <div class="row mb-3">
-                                    <div class="col">
-                                        <button class="btn btn-outline-success border-2 rounded-3" name="pilihan"
-                                            value="{{ $option->id }}" type="submit">{{ $option->option }}</button>
-                                    </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <h3 class="text-center bg-info bg-opacity-25 py-2 my-5 rounded-3">Kamu sudah vote</h3>
                                 </div>
-                            @endforeach
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -49,5 +46,4 @@
             }
         }, 1000);
     </script>
-    </div>
 @endsection
