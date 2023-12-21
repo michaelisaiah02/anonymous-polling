@@ -13,13 +13,6 @@ class VoteSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call([
-            PollSeeder::class,
-            OptionSeeder::class,
-        ]);
-
-        WithoutModelEvents::disable();
-
-        Vote::factory(10)->create();
+        //
     }
 }

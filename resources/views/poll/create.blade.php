@@ -49,7 +49,7 @@
                                 <label for="option" class="text-dark-emphasis bg-transparent">Opsi B</label>
                             </div>
                             <div id="optionsContainer"></div>
-                            <div class="row mb-3">
+                            <div class="row mb-5 mt-4">
                                 <button class="btn btn-outline-dark border border-2 border-dark rounded-3 px-5"
                                     type="button" onclick="addOption()">Tambah
                                     Opsi</button>

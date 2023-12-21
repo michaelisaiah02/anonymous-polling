@@ -13,6 +13,6 @@ class PollSeeder extends Seeder
      */
     public function run(): void
     {
-        Poll::factory(10)->create();
+        //
     }
 }

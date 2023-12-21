@@ -13,6 +13,6 @@ class OptionSeeder extends Seeder
      */
     public function run(): void
     {
-        Option::factory(10)->create();
+        //
     }
 }
